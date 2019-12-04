@@ -1,20 +1,31 @@
 #!/bin/bash -x
-EMP_RATE_PER_HOUR=280
-randomPresent=$((RANDOM%3))
-fullTime=2
-partTime=1
-
+EMP_RATE_PER_HOUR=300
+present=1
+absent=0
+totalSalary=0
+day=0
+hour=0
+randomTime=$((RANDOM%2))
+if [ $randomTime -eq 1 ]
+then
+	empWorkingHour=8
+else
+	empWorkingHour=4
+fi
+while [[ day -le 20 || hour -le 50 ]]
+do
+	workingHour=$empWorkingHour
+	randomPresent=$((RANDOM%2))
 	case  $randomPresent in
-	$fullTime)
-		empWorkingHour=8
+	$present)
+		empWorkingHour=$workingHour
+		hour=$(($hour+$empWorkingHour))
 	;;
-	$partTime)
-		empWorkingHour=4
+	$absent)
 	;;
-	*)
-		empWorkingHour=0
-	;;
-esac
-dailySalary=$((EMP_RATE_PER_HOUR*empWorkingHour))
-echo "daily wage of the employee: " $dailySalary
-
+	esac
+dailySalary=$(($EMP_RATE_PER_HOUR * $empWorkingHour))
+totalSalary=$(( $totalSalary + $dailySalary ))
+day=$(($day+1))
+done
+echo "total salary :" $totalSalary
