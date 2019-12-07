@@ -41,7 +41,7 @@ do
 		secondLarge=${array[j]}
 	fi
 done
-#echo "large value  "$large
+echo "large value  "$large
 echo "second large value "$secondLarge
 
 
