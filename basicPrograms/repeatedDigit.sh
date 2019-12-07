@@ -1,34 +1,13 @@
-#!/bin/bash -x
-j=0
-sum=0
+#!/bin/bash
 
-function logicPart()
-{
-	value=$i
-	echo $value
-	while [ $value==0 ]
-	do
-	temp1=$(( $value % 10 ))
-	sum=$((($sum*10) + $temp1))
-	value=$(($value/10))
-	done
-	if [ $temp1==$value ]
-	then
-		answer=0
-	else
-		answer=1
-	fi
-}
-logicPart answer
+count=0 number=100
 
-
-
-for((i=0;i<=100;i++))
+for (( i=1 ; i<$number; i++ ))
 do
-	value=$(logicPart $i)
-	if [ answer==0 ]
+	if [ $(($i%11)) -eq 0 ]
 	then
-		array[j]=$i
+	array[(count++)]=$i;
 	fi
 done
 
+echo "Numbers are "${array[@]}
